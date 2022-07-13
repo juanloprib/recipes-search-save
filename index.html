@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Favorite Recipes</title>
+    <meta name="description" content="Recipes search provided by Yummly.">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="styles/main.css?1657729531">
+</head>
+<body>
+
+    <!-- SEARCH INPUTS AND BANNER -->
+    <section id="search-banner">
+        <h1>Your <span>Favorite</span> Recipes</h1>
+        <h6>Powered by <a href="https://www.yummly.com/" target="_blank">Jummly's API</a></h6>
+        <div id="search-inputs">
+            <input type="text" id="search-text" placeholder="Your favorite recipe">
+            <button id="search-submit" class="generic-button">Search</button>
+        </div>
+    </section>
+
+    <!-- DISPLAY SEARCH RESULTS OR SAVED RECIPES -->
+    <nav>
+        <button id="nav-search" class="generic-button selected">Search Results</button>
+        <button id="nav-saved" class="generic-button secondary-button">Saved Recipes: <span>0</span></button>
+    </nav>
+
+    <!-- SEARCH RESULTS -->
+    <section id="search-results"></section>
+
+    <!-- SAVED RESULTS -->
+    <section id="saved-results">
+        <p>You haven't saved recipes yet.</p>
+    </section>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading"><img src="images/fork.svg" alt="Your Favorite Recipes"/></div>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/foodapp.js?1657729531" type="module"></script>
+
+</body>
+</html>
