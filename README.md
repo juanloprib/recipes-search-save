@@ -1,6 +1,8 @@
 # Recipe Search App
 
-This is a simple recipe search app built with vanilla JavaScript, CSS, and HTML. It uses the Yummly API to search for recipes and displays a maximum of 12 results. The app follows the Model-View-Controller (MVC) architecture.
+This is a simple recipe search app built with vanilla JavaScript, CSS, and HTML. It uses the Yummly API to search for recipes and displays a maximum of 12 results. The app follows the Model-View-Controller (MVC) architecture. Find a demo at:
+
+* [https://www.sessiontown.com/food](https://www.sessiontown.com/food)
 
 ## Features
 
