@@ -6,50 +6,72 @@
 
 /* VIEW */
 
+
 export class FoodView {
+
+
+  // dom elements
+  #sendButton;
+  #queryField;
+  #resultsContainer;
+  #savedContainer;
+  #loadingScreen;
+  #navSearchBtn;
+  #navSavedBtn;
+  #hasDeleted;
+
 
   // constructor
   constructor() {
 
-    const that = this;
-    this.hasDeleted = false; // tracks when a user deletes a recipe. If true search is reloaded to have the save button back
+    // tracks when a user deletes a recipe. If true search is reloaded to have the save button back
+    this.#hasDeleted = false; 
 
     // get dom elements
-    this.sendButton = document.getElementById("search-submit");
-    this.queryField = document.getElementById("search-text");
-    this.resultsContainer = document.getElementById("search-results");
-    this.savedContainer = document.getElementById("saved-results");
-    this.loadingScreen = document.getElementById("loading");
-    this.navSearchBtn = document.getElementById("nav-search");
-    this.navSavedBtn = document.getElementById("nav-saved");
+    this.#sendButton = document.getElementById("search-submit");
+    this.#queryField = document.getElementById("search-text");
+    this.#resultsContainer = document.getElementById("search-results");
+    this.#savedContainer = document.getElementById("saved-results");
+    this.#loadingScreen = document.getElementById("loading");
+    this.#navSearchBtn = document.getElementById("nav-search");
+    this.#navSavedBtn = document.getElementById("nav-saved");
 
     // focus search input
     this.focusSearch(true);
 
     // EVENTS:
+    this.setupEvents();
+
+  }
+
+
+  // setup element events
+  setupEvents() {
+
+    const that = this;
 
     // submit search with button
-    this.sendButton.addEventListener("click", (event) => {
-        that.search();
+    this.#sendButton.addEventListener("click", function(e) {
+      that.search();
     });
 
     // submit with enter key
-    this.queryField.addEventListener("keyup", (event) => {
-      if(event.key === "Enter"){
+    this.#queryField.addEventListener("keyup", function(e) {
+      if(e.key === "Enter"){
         that.search();
       }
     });
 
     // display saved recipes
-    this.navSavedBtn.addEventListener("click", function(e) {
+    this.#navSavedBtn.addEventListener("click", function(e) {
       that.displaySaved(true);
     });
 
     // display results
-    this.navSearchBtn.addEventListener("click", function(e) {
-      if(that.hasDeleted){
+    this.#navSearchBtn.addEventListener("click", function(e) {
+      if(that.#hasDeleted){
         that.search();
-        that.hasDeleted = false;
+        that.#hasDeleted = false;
       }
       that.displaySaved(false);
     });
@@ -86,43 +108,47 @@ export class FoodView {
           {detail: e.target.getAttribute("data-delete")}
         );
         document.dispatchEvent(deleteEvent);
-        that.hasDeleted = true;
+        that.#hasDeleted = true;
       }
 
     });
 
   }
 
+
   // returns the query for the search
   getQuery() {
-    return this.queryField.value;
+    return this.#queryField.value;
   }
+
 
   // if true displays saved recipes
   // If false shows results from search
   displaySaved(showSaved) {
     if(showSaved){
-      this.resultsContainer.style.display = "none";
-      this.savedContainer.style.display = "flex";
-      this.navSearchBtn.classList.remove("selected");
-      this.navSavedBtn.classList.add("selected");
+      this.#resultsContainer.style.display = "none";
+      this.#savedContainer.style.display = "flex";
+      this.#navSearchBtn.classList.remove("selected");
+      this.#navSavedBtn.classList.add("selected");
     }else{
-      this.resultsContainer.style.display = "flex";
-      this.savedContainer.style.display = "none";
-      this.navSearchBtn.classList.add("selected");
-      this.navSavedBtn.classList.remove("selected");
+      this.#resultsContainer.style.display = "flex";
+      this.#savedContainer.style.display = "none";
+      this.#navSearchBtn.classList.add("selected");
+      this.#navSavedBtn.classList.remove("selected");
     }
   }
 
+
   // toggle no saved recipes message
   displayNoRecipesSaved(showMsg) {
-    let msgEl = this.savedContainer.getElementsByTagName("p")[0];
+    let msgEl = this.#savedContainer.getElementsByTagName("p")[0];
     if(showMsg){
       msgEl.style.display = "block";
     }else{
       msgEl.style.display = "none";
     }
   }
+
 
   // create a container for one recipe
   createResult(title, img, url, displayInSaved, hideSave, addBefore) {
@@ -172,15 +198,15 @@ export class FoodView {
     if(displayInSaved){
       resultContainer.appendChild(resultDeleteBtn);
       if(addBefore){
-        this.savedContainer.prepend(resultContainer);
+        this.#savedContainer.prepend(resultContainer);
       }else{
-        this.savedContainer.appendChild(resultContainer);
+        this.#savedContainer.appendChild(resultContainer);
       }
     }else{
       if(!hideSave){
         resultContainer.appendChild(resultSaveBtn);
       }
-      this.resultsContainer.appendChild(resultContainer);
+      this.#resultsContainer.appendChild(resultContainer);
     }
 
     // image not loaded 
@@ -189,6 +215,7 @@ export class FoodView {
       "this.onerror=null;this.src='images/noimage.jpg';this.classList.add('no-image');"
     );
   }
+
 
   // display saved recipes
   displaySavedRecipes(savedRecipes) {
@@ -207,42 +234,48 @@ export class FoodView {
     this.displaySaved(true);
   }
 
+
   // remove results container children
   emptyResultsContainer() {
-    this.resultsContainer.innerHTML = "";
+    this.#resultsContainer.innerHTML = "";
   }
+
 
   // display or hide loading screen
   loading(displayLoading) {
     if(displayLoading){
-      this.loadingScreen.style.display = "flex";
+      this.#loadingScreen.style.display = "flex";
     }else{
-      this.loadingScreen.style.display = "none";
+      this.#loadingScreen.style.display = "none";
     }
   }
+
 
   // display an error message
   error(errorMessage) {
     that.view.emptyResultsContainer();
     const errorContainer = document.createElement("p");
     errorContainer.innerText = errorMessage;
-    this.resultsContainer.appendChild(errorContainer);
+    this.#resultsContainer.appendChild(errorContainer);
     that.view.loading(false);
   }
+
 
   // focus and blurs search input
   focusSearch(shouldFocus) {
     if(shouldFocus){
-      this.queryField.focus();
+      this.#queryField.focus();
     }else{
-      this.queryField.blur();
+      this.#queryField.blur();
     }
   }
 
+
   // set number of saved recipes 
   setNumberOfRecipes(numberOfRecipes) {
-    this.navSavedBtn.getElementsByTagName('span')[0].innerText = numberOfRecipes;
+    this.#navSavedBtn.getElementsByTagName('span')[0].innerText = numberOfRecipes;
   }
+
 
   // when user submits search
   search() {
@@ -253,4 +286,5 @@ export class FoodView {
     document.dispatchEvent(event);
   }
   
+
 }

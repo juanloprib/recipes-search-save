@@ -3,10 +3,14 @@
   MVC Architecture
 */
 
+'use strict';
 
-// import and initialize
-import {FoodModel} from './FoodModel.js';
-import {FoodView} from './FoodView.js';
-import {FoodController} from './FoodController.js';
+// import and initialize MVC components
+import { FoodModel } from './FoodModel.js';
+import { FoodView } from './FoodView.js';
+import { FoodController } from './FoodController.js';
 
-const foodApp = new FoodController(new FoodModel(), new FoodView());
+const foodApp = new FoodController(
+  new FoodModel(),
+  new FoodView()
+);
