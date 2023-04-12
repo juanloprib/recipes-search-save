@@ -3,17 +3,22 @@
   MVC Architecture
 */
 
+
 import { yummlyAPIKey, yummlyAPIHost, yummlyAPIUrl } from './config.js';
+
 
 /* MODEL */
 
+
 export class FoodModel {
+
 
   #options;
   #url;
   #maxResults;
   #startResults;
   #myRecipes;
+
 
   constructor(settings) {
 
@@ -41,6 +46,7 @@ export class FoodModel {
 
   }
 
+
   // search for a particular query in Yummly
   async foodSearch(searchTerm) {
     try {
@@ -57,6 +63,7 @@ export class FoodModel {
     }
   }
 
+
   // send event with the Yummly response
   apiResponse(apiJson) {
     if(apiJson.hasOwnProperty("feed")){
@@ -70,12 +77,14 @@ export class FoodModel {
     }
   }
 
+
   // send event in case of an error
   apiError(theError) {
     // console.log(theError);
     const event = new Event('foodApiError');
     document.dispatchEvent(event);
   }
+
 
   // save a recipe in localStorage
   saveRecipe(newTitle, newImage, newURL) {
@@ -95,6 +104,7 @@ export class FoodModel {
     return false;
   }
 
+
   // delete a recipe using its URL
   deleteRecipe(url) {
     const found = this.isRecipeSaved(url);
@@ -108,6 +118,7 @@ export class FoodModel {
     }
     return false;
   }
+
 
   // retrieve saved recipes object in localStorage
   getSavedRecipes() {
@@ -124,10 +135,12 @@ export class FoodModel {
     return this.#myRecipes;
   }
 
+
   // get the number of recipes saved in localStorage
   getNumberOfRecipes() {
     return this.#myRecipes.length;
   }
+
 
   // test if this recipe is saved using its URL
   isRecipeSaved(url) {
@@ -139,4 +152,5 @@ export class FoodModel {
     });
   }
 
+  
 }

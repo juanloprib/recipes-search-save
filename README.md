@@ -68,3 +68,8 @@ This project is for educational purposes (MVC architecture). It is not intended 
     * The controller now has multiple methods to handle events for better readability
 * 1.1.1
     * README.md file updated
+* 1.1.2
+    * More space added between methods in FoodModel
+    * View events refactored in multiple methods for better readability and scalability
+    * Epoch times in index.html updated
+    * README.md file updated

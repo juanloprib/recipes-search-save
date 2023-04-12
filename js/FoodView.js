@@ -39,35 +39,48 @@ export class FoodView {
     // focus search input
     this.focusSearch(true);
 
-    // EVENTS:
-    this.setupEvents();
+    // events:
+    this.sendButtonEvent();
+    this.queryFieldEvent();
+    this.navSavedBtnEvent();
+    this.navSearchBtnEvent();
+    this.saveDeleteEvent();
 
   }
 
 
-  // setup element events
-  setupEvents() {
-
+  // submit search with button
+  sendButtonEvent() {
     const that = this;
-
-    // submit search with button
     this.#sendButton.addEventListener("click", function(e) {
       that.search();
     });
+  }
 
-    // submit with enter key
+
+  // submit with enter key
+  queryFieldEvent() {
+    const that = this;
     this.#queryField.addEventListener("keyup", function(e) {
       if(e.key === "Enter"){
         that.search();
       }
     });
+  }
 
-    // display saved recipes
+
+  // display saved recipes
+  navSavedBtnEvent() {
+    const that = this;
     this.#navSavedBtn.addEventListener("click", function(e) {
       that.displaySaved(true);
     });
+  }
 
-    // display results
+
+  // display results
+  navSearchBtnEvent() {
+    const that = this;
     this.#navSearchBtn.addEventListener("click", function(e) {
       if(that.#hasDeleted){
         that.search();
@@ -75,8 +88,12 @@ export class FoodView {
       }
       that.displaySaved(false);
     });
+  }
 
-    // save and delete recipe 
+
+  // save and delete recipe
+  saveDeleteEvent() {
+    const that = this;
     document.addEventListener("click", function(e) {
 
       // save
@@ -112,7 +129,6 @@ export class FoodView {
       }
 
     });
-
   }
 
 
