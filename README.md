@@ -73,3 +73,6 @@ This project is for educational purposes (MVC architecture). It is not intended 
     * View events refactored in multiple methods for better readability and scalability
     * Epoch times in index.html updated
     * README.md file updated
+* 1.1.3
+    * Error thrown by FoodModel fixed. When it was being instantiated, it was not passing the `settings` object as an argument.
+    * Epoch times in index.html updated.

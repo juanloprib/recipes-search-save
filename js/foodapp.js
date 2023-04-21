@@ -11,6 +11,6 @@ import { FoodView } from './FoodView.js';
 import { FoodController } from './FoodController.js';
 
 const foodApp = new FoodController(
-  new FoodModel(),
+  new FoodModel({}),
   new FoodView()
 );
